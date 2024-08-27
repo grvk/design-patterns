@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2016", /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "target": "es2016",
     "module": "ES6",
     "rootDir": "./src",
     "moduleResolution": "bundler",
@@ -8,9 +8,6 @@
     "allowJs": true,
     "checkJs": true,
     "maxNodeModuleJsDepth": 1,
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
     "outDir": "./build",
     "removeComments": false,
     "noEmitOnError": true,
