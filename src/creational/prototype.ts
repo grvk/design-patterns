@@ -1,88 +1,56 @@
-/*
-Context:
-
-****************** Old-way of creating classes:
-
-function Person(fullName) {
-  this.fullName = fullName;
-}
-
-Person.prototype.greet = function() {
-  console.log("Hello, I'm " + this.fullName + ".")
-}
-
-****************** New way (syntactic sugar)
-
-class Person {
-  constructor(fullName) {
-    this.fullName = fullName;
+(() => {
+  interface Configuration {
+    timestamp: number;
+    location: string;
+    isPrivate: boolean;
+    clone: () => Configuration;
+    print: () => void;
   }
 
-  greet() {
-    console.log(`Hello, I'm ${this.fullName}.`)
+  interface UserConfiguration extends Configuration {
+    userId: string;
+    balance: number;
   }
-}
 
-****************** Results
+  const client = () => {
+    const config: Configuration = {
+      timestamp: 12345,
+      location: 'Earth',
+      isPrivate: false,
+      clone: function () {
+        // make sure this method works for your use case:
+        // do you need to copy-over any values?
+        // is shallow-copying ok?
+        return Object.create(this);
+      },
+      print: function () {
+        console.log(`~~~~~ private config: ${this.isPrivate}`);
+      }
+    };
+    config.print();
 
-var person = new Person('John Smith');
+    const userConfig = <UserConfiguration>config.clone();
+    userConfig.userId = '15';
+    userConfig.balance = 591.15;
+    userConfig.isPrivate = true;
+    userConfig.print();
+    config.print();
+    userConfig.print();
 
-{
-  fullName: 'John Smith',
-  __proto__: {
-    greet: function() { console.log('...')},
-    constructor: Person(fullName), // function
-    __proto__: Object
+    const anotherClone = userConfig.clone();
+    anotherClone.isPrivate = false;
+    anotherClone.print();
+
+
   }
-}
-*/
 
-interface Configuration {
-  timestamp: number;
-  location: string;
-  isPrivate: boolean;
-  clone: () => Configuration;
-  print: () => void;
-}
+  client();
+})()
 
-interface UserConfiguration extends Configuration {
-  userId: string;
-  balance: number;
-}
+// Output:
 
-
-
-
-const prototypeClient = () => {
-  const config: Configuration = {
-    timestamp: 12345,
-    location: 'Earth',
-    isPrivate: false,
-    clone: function () {
-      // make sure this method works for your use case:
-      // do you need to copy-over any values?
-      // is shallow-copying ok?
-      return Object.create(this);
-    },
-    print: function () {
-      console.log(`~~~~~ private config: ${this.isPrivate}`);
-    }
-  };
-  config.print();
-
-  const userConfig = <UserConfiguration>config.clone();
-  userConfig.userId = '15';
-  userConfig.balance = 591.15;
-  userConfig.isPrivate = true;
-  userConfig.print();
-  config.print();
-  userConfig.print();
-
-  const anotherClone = userConfig.clone();
-  anotherClone.isPrivate = false;
-  anotherClone.print();
-
-
-}
-
-prototypeClient();
+// ~~~~~ private config: false
+// ~~~~~ private config: true
+// ~~~~~ private config: false
+// ~~~~~ private config: true
+// ~~~~~ private config: false

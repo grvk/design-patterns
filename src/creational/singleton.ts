@@ -1,34 +1,46 @@
-class Singleton {
-  private static _instance: Singleton;
-  private static count = 0;
+(() => {
+  class Singleton {
+    private static _instance: Singleton;
+    private static count = 0;
 
-  private constructor() {
-    Singleton.count++;
-    console.log('Initializing Singleton');
-  }
-
-  public static get instance(): Singleton {
-    if (!Singleton._instance) {
-      Singleton._instance = new Singleton();
+    private constructor() {
+      Singleton.count++;
+      console.log('Initializing Singleton');
     }
-    console.log("Returning Singleton instance");
-    return Singleton._instance;
+
+    public static get instance(): Singleton {
+      if (!Singleton._instance) {
+        Singleton._instance = new Singleton();
+      }
+      console.log("Returning Singleton instance");
+      return Singleton._instance;
+    }
+
+    public count(): void {
+      console.log(`Count Singleton instances: ${Singleton.count}`);
+    }
   }
 
-  public count(): void {
-    console.log(`Count Singleton instances: ${Singleton.count}`);
-  }
-}
 
+  const client = () => {
+    const singleton1 = Singleton.instance;
+    const singleton2 = Singleton.instance;
+    const singleton3 = Singleton.instance;
 
-const slingletonClient = () => {
-  const singleton1 = Singleton.instance;
-  const singleton2 = Singleton.instance;
-  const singleton3 = Singleton.instance;
+    singleton1.count();
+    singleton2.count();
+    singleton3.count();
+  };
 
-  singleton1.count();
-  singleton2.count();
-  singleton3.count();
-};
+  client();
+})()
 
-slingletonClient();
+// Output:
+
+// Initializing Singleton
+// Returning Singleton instance
+// Returning Singleton instance
+// Returning Singleton instance
+// Count Singleton instances: 1
+// Count Singleton instances: 1
+// Count Singleton instances: 1

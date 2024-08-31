@@ -1,56 +1,66 @@
-interface IUser {
-  toJson(): string;
-}
-
-class GuestUser implements IUser {
-  private fullName: string;
-
-  constructor(fName: string) {
-    this.fullName = fName;
+(() => {
+  interface IUser {
+    toJson(): string;
   }
 
-  toJson(): string {
-    return JSON.stringify({ type: 'guest', name: this.fullName })
+  class GuestUser implements IUser {
+    private fullName: string;
+
+    constructor(fName: string) {
+      this.fullName = fName;
+    }
+
+    toJson(): string {
+      return JSON.stringify({ type: 'guest', name: this.fullName })
+    }
+  };
+
+  class AdminUser implements IUser {
+    private fullName: string;
+
+    constructor(fName: string) {
+      this.fullName = fName;
+    }
+
+    toJson(): string {
+      return JSON.stringify({ type: 'admin', name: this.fullName })
+    }
+  };
+
+
+  const createUser = (type: string, fullName: string) => {
+    if (type === 'guest') {
+      return new GuestUser(fullName);
+    }
+
+    if (type === 'admin') {
+      return new AdminUser(fullName);
+    }
+
+    throw new Error("Unknown user type");
   }
-};
 
-class AdminUser implements IUser {
-  private fullName: string;
 
-  constructor(fName: string) {
-    this.fullName = fName;
+  const client = () => {
+    const guest1 = createUser('guest', 'Jack Smith')
+    const guest2 = createUser('guest', 'Anna Martinez')
+    const admin1 = createUser('admin', 'Julia Barr')
+    const admin2 = createUser('admin', 'David Hu')
+
+    console.log(guest1.toJson())
+    console.log(guest2.toJson())
+    console.log(admin1.toJson())
+    console.log(admin2.toJson())
   }
 
-  toJson(): string {
-    return JSON.stringify({ type: 'admin', name: this.fullName })
-  }
-};
 
+  client();
+})()
 
-const createUser = (type: string, fullName: string) => {
-  if (type === 'guest') {
-    return new GuestUser(fullName);
-  }
+// Output:
 
-  if (type === 'admin') {
-    return new AdminUser(fullName);
-  }
+// { "type": "guest", "name": "Jack Smith" }
+// { "type": "guest", "name": "Anna Martinez" }
+// { "type": "admin", "name": "Julia Barr" }
+// { "type": "admin", "name": "David Hu" }
 
-  throw new Error("Unknown user type");
-}
-
-
-const simpleFactoryClient = () => {
-  const guest1 = createUser('guest', 'Jack Smith')
-  const guest2 = createUser('guest', 'Anna Martinez')
-  const admin1 = createUser('admin', 'Julia Barr')
-  const admin2 = createUser('admin', 'David Hu')
-
-  console.log(guest1.toJson())
-  console.log(guest2.toJson())
-  console.log(admin1.toJson())
-  console.log(admin2.toJson())
-}
-
-
-simpleFactoryClient();
