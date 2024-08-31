@@ -2,6 +2,7 @@
 
 - Observer Design Pattern: [observer.ts](./observer.ts)
 - Visitor Design Pattern [visitor.ts](./visitor.ts)
+- Chain of Responsibility [chain-of-responsibility.ts](./chain-of-responsibility.ts)
 
 ## Observer Design Pattern
 
@@ -43,3 +44,28 @@
 - [GeeksForGeeks](https://www.geeksforgeeks.org/visitor-design-pattern/)
 - [Refactoring Guru](https://refactoring.guru/design-patterns/visitor)
 - [Stackoverflow](https://stackoverflow.com/questions/255214/when-should-i-use-the-visitor-design-pattern)
+
+## Chain of Responsibility
+
+### Summary
+- lets you pass requests / objects along a chain of handlers
+- each handler decides whether to:
+  - *accept & process it*
+  - *pass along*
+
+#### Types
+- DO NOT pass along if successfully processed
+  - *Example: DOM parsing to find proper a UI element that will process an event* (from tree leaf to window object)
+- DO pass along if (successfully) processed
+  - *Example: input verification checks*
+
+
+### When to use
+- When you need to synchronyously peform a series of function calls on an object
+- When you need to apply a series of checks, in which the order of checks matters
+- When you have a request needs to go through a series of middleware (e.g. auth)
+
+
+### Sources
+- [GeeksForGeeks](https://www.geeksforgeeks.org/chain-responsibility-design-pattern/)
+- [Refactoring Guru](https://refactoring.guru/design-patterns/chain-of-responsibility)
