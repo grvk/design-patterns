@@ -4,6 +4,7 @@
 - Visitor Design Pattern [visitor.ts](./visitor.ts)
 - Chain of Responsibility [chain-of-responsibility.ts](./chain-of-responsibility.ts)
 - Command [command.ts](./command.ts)
+- State [state.ts](./state.ts)
 
 ## Observer Design Pattern
 
@@ -71,7 +72,7 @@
 - [GeeksForGeeks](https://www.geeksforgeeks.org/chain-responsibility-design-pattern/)
 - [Refactoring Guru](https://refactoring.guru/design-patterns/chain-of-responsibility)
 
-## Command Method
+## Command
 
 ### Summary
 - encapsulates all information required to perform an action
@@ -95,3 +96,19 @@
 - [GeeksForGeeks](https://www.geeksforgeeks.org/behavioral-design-patterns/#2-command-method-design-pattern)
 - [Refactoring Guru](https://refactoring.guru/design-patterns/command)
 - [ArjanCodes](https://arjancodes.com/blog/python-command-design-pattern-tutorial-for-scalable-applications/)
+
+## State Design Pattern
+
+### Summary
+- Changes behavior of an object depending on its current state
+- (related to Finite State Machine)
+
+### When to use
+- System has a finite state of states, which affects available behavior
+- When your current implementation has a lot of if-conditions that manage behavior based on current state
+
+### When not to use
+- Your finite state machine has very few states
+
+### Sources
+- [Refactoring Guru](https://refactoring.guru/design-patterns/state)
