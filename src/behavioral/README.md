@@ -3,6 +3,7 @@
 - Observer Design Pattern: [observer.ts](./observer.ts)
 - Visitor Design Pattern [visitor.ts](./visitor.ts)
 - Chain of Responsibility [chain-of-responsibility.ts](./chain-of-responsibility.ts)
+- Command [command.ts](./command.ts)
 
 ## Observer Design Pattern
 
@@ -69,3 +70,28 @@
 ### Sources
 - [GeeksForGeeks](https://www.geeksforgeeks.org/chain-responsibility-design-pattern/)
 - [Refactoring Guru](https://refactoring.guru/design-patterns/chain-of-responsibility)
+
+## Command Method
+
+### Summary
+- encapsulates all information required to perform an action
+  - ^ implies parameterization of actions
+- which is later sent to the logical software unit
+
+### When to use
+- When you're dealing with: *menus, queue operations, transactions*
+- Decoupling of (sender) object and operational logic is needed
+- You have multiple entries that need to execute the same action
+- Undo / redo functionality is needed (just save reverse args in the command)
+- You need to support logging / queuing of actions 
+
+### When not to use
+- **TLDR;** when it's an overkill
+- When coupling sender and operational logic is ok
+- When queueing, scheduling, ordering actions isn't requried (use Observer)
+- When action parameterization isn't required
+
+### Sources
+- [GeeksForGeeks](https://www.geeksforgeeks.org/behavioral-design-patterns/#2-command-method-design-pattern)
+- [Refactoring Guru](https://refactoring.guru/design-patterns/command)
+- [ArjanCodes](https://arjancodes.com/blog/python-command-design-pattern-tutorial-for-scalable-applications/)
